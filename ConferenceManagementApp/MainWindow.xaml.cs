@@ -43,8 +43,7 @@ namespace ConferenceManagementApp
             Conferences = new List<Conference>();
             LoadResearchers();
             LoadConferences();
-            researchersListBox.ItemsSource = Researchers;
-            conferencesListBox.ItemsSource = Conferences;
+
             analysisResultsDataGrid.ItemsSource = AnalysisResults;
             // Создайте список AnalysisResults и заполните его  
             AnalysisResults = new List<AnalysisResult>();
@@ -140,23 +139,7 @@ namespace ConferenceManagementApp
             }
         }
 
-        private void AddParticipationButton_Click(object sender, RoutedEventArgs e)
-        {
-            var selectedResearchers = researchersListBox.SelectedItems;
-            var selectedConference = (Conference)conferencesListBox.SelectedItem;
-            string topic = topicTextBox.Text;
-
-            if (selectedResearchers.Count == 0 || selectedConference == null)
-            {
-                MessageBox.Show("Please select at least one researcher and one conference.");
-                return;
-            }
-
-            foreach (Researcher researcher in selectedResearchers)
-            {
-                AddParticipation(researcher.Id, selectedConference.ConferenceCode, topic);
-            }
-        }
+        
 
         private void AddParticipation(int researcherId, int conferenceCode, string topic)
         {
@@ -321,9 +304,10 @@ namespace ConferenceManagementApp
                     MessageBox.Show("Error: " + ex.Message);
                 }
             }
-
+            
             return nextEmployeeId;
         }
+        
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
@@ -377,4 +361,5 @@ namespace ConferenceManagementApp
         public DateTime Date { get; set; }
         public string Location { get; set; }
     }
+
 }
